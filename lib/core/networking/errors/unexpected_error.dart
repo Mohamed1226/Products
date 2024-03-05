@@ -2,5 +2,6 @@
 import 'base_error.dart';
 
 class UnExpectedError extends BaseError {
-  UnExpectedError() : super("UnExpectedError");
+  String? errorMessage;
+  UnExpectedError({this.errorMessage}) : super("UnExpectedError");
 }

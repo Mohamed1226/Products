@@ -1,6 +1,3 @@
-
-
-
 import '../app_localization/app_localization.dart';
 import 'base_validators.dart';
 

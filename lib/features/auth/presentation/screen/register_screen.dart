@@ -4,7 +4,9 @@ import 'package:ready_structure/core/theming/styles/fonts.dart';
 import 'package:ready_structure/core/ui/screen/app_statefull.dart';
 import 'package:ready_structure/core/ui/widgets/app_primary_button.dart';
 import 'package:ready_structure/core/ui/widgets/app_text_field.dart';
+import 'package:ready_structure/core/validators/email_validator.dart';
 import 'package:ready_structure/core/validators/required_validators.dart';
+import 'package:ready_structure/features/auth/data/model/user_model.dart';
 import 'package:ready_structure/features/auth/presentation/cubit/auth_cubit.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -40,14 +42,14 @@ class _RegisterScreenState extends AppScreen<RegisterScreen, AuthCubit> {
                   SizedBox(height: 24.h),
                   AppTextFormField(
                     label: "your name",
-                    controller: nameController
-                    , validators: [RequiredValidator()],
+                    controller: nameController,
+                    validators: [RequiredValidator()],
                   ),
                   SizedBox(height: 18.h),
                   AppTextFormField(
                       label: "your email",
                       controller: emailController,
-                      validators: [RequiredValidator()]),
+                      validators: [RequiredValidator(), EmailValidator()]),
                   SizedBox(height: 18.h),
                   AppTextFormField(
                       label: "your password",
@@ -57,8 +59,12 @@ class _RegisterScreenState extends AppScreen<RegisterScreen, AuthCubit> {
                   AppPrimaryButton(
                     text: "register",
                     onPressed: () {
-                      if (key.currentState!.validate()){
-
+                      if (key.currentState!.validate()) {
+                        cubit.register(
+                            user: UserModel(
+                                email: emailController.text,
+                                name: nameController.text,
+                                password: passwordController.text));
                       }
                     },
                   )

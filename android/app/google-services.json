@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "219068608460",
+    "project_id": "londonchallenge-c6b2d",
+    "storage_bucket": "londonchallenge-c6b2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219068608460:android:96ccc1c685426d7ccef769",
+        "android_client_info": {
+          "package_name": "com.example.ready_structure"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_aP3c5UsdA7aqrXB45nquwxZl-OOwt0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
