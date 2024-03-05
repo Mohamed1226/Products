@@ -50,7 +50,5 @@ class _ProductsFavouriteScreenState
   }
 
   @override
-  onInitState() {
-    cubit.getProducts();
-  }
+  onInitState() {}
 }

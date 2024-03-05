@@ -114,6 +114,5 @@ class _ProductsDetailsScreenState
 
   @override
   onInitState() {
-    cubit.getProducts();
   }
 }
