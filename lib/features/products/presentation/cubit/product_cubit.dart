@@ -9,6 +9,20 @@ class ProductCubit extends AppCubit {
   final ProductUseCase useCase;
 
   List<Product> products = [];
+  List<Product> favouriteProducts = [];
+
+  void addToFavouriteList(Product product) {
+    product.isFavourite = true;
+    favouriteProducts.add(product);
+    emit(RefreshResource());
+  }
+
+  void removeFromFavouriteList(Product product) {
+    product.isFavourite = false;
+
+    favouriteProducts.removeWhere((element) => element.id == product.id);
+    emit(RefreshResource());
+  }
 
   Future<void> getProducts() async {
     emit(LoadingResource());

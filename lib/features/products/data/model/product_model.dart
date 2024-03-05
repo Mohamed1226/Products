@@ -25,6 +25,7 @@ class Product extends BaseApiDataModel {
   final String category;
   final String image;
   final double price;
+   bool isFavourite;
 
   final RateModel rate;
 
@@ -36,6 +37,7 @@ class Product extends BaseApiDataModel {
     required this.image,
     required this.price,
     required this.rate,
+    required this.isFavourite,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,7 @@ class Product extends BaseApiDataModel {
         rate: RateModel.fromJson(json["rating"]),
         id: json["id"],
         title: json["title"],
+        isFavourite: false,
         description: json["description"],
         category: json["category"],
         image: json["image"],

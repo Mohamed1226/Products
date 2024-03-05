@@ -3,6 +3,7 @@ import 'package:ready_structure/core/di/locator.dart';
 import 'package:ready_structure/core/services/navigation.dart';
 import 'package:ready_structure/core/shared_prefs/app_shared_prefs.dart';
 import 'package:ready_structure/core/theming/styles/fonts.dart';
+import 'package:ready_structure/features/auth/presentation/screen/login_screen.dart';
 import 'package:ready_structure/features/auth/presentation/screen/register_screen.dart';
 import 'package:ready_structure/features/products/presentation/screen/products_screen.dart';
 
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (locator<AppSharedPrefs>().isRememberMe) {
         locator<NavigationService>().pushAndRemoveUntil(const ProductsScreen());
       } else {
-        locator<NavigationService>().pushAndRemoveUntil(const RegisterScreen());
+        locator<NavigationService>().pushAndRemoveUntil(const LoginScreen());
       }
     });
     super.initState();
