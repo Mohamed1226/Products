@@ -26,7 +26,6 @@ class Product extends BaseApiDataModel {
   final String image;
   final double price;
    bool isFavourite;
-
   final RateModel rate;
 
   Product({

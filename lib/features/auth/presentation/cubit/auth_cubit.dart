@@ -17,10 +17,7 @@ class AuthCubit extends AppCubit {
     emit(LoadingResource());
     final result = await useCase.register(user);
     if (result.hasDataOnly) {
-      emit(SuccessResource());
-      locator<AppSharedPrefs>().setRememberMe(true);
-      AppSnackBar.showSuccessSnackBar();
-      locator<NavigationService>().pushAndRemoveUntil(const ProductsScreen());
+      onAuthSuccess(user);
     } else {
       emit(ErrorResource());
       AppSnackBar.showErrorSnackBar(message: result.error!.message);
@@ -31,14 +28,19 @@ class AuthCubit extends AppCubit {
     emit(LoadingResource());
     final result = await useCase.login(user);
     if (result.hasDataOnly) {
-      emit(SuccessResource());
-      locator<AppSharedPrefs>().setRememberMe(true);
-      AppSnackBar.showSuccessSnackBar();
-      locator<NavigationService>().pushAndRemoveUntil(const ProductsScreen());
+      onAuthSuccess(user);
     } else {
       emit(ErrorResource());
       AppSnackBar.showErrorSnackBar(message: result.error!.message);
     }
+  }
+
+  onAuthSuccess(UserModel user) async {
+    emit(SuccessResource());
+    locator<AppSharedPrefs>().setRememberMe(true);
+    locator<AppSharedPrefs>().setUserModel(user);
+    AppSnackBar.showSuccessSnackBar();
+    locator<NavigationService>().pushAndRemoveUntil(const ProductsScreen());
   }
 
   void logOut() {

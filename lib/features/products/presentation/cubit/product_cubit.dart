@@ -14,20 +14,13 @@ class ProductCubit extends AppCubit {
   void addToFavouriteList(Product product) {
     product.isFavourite = true;
     favouriteProducts.add(product);
-    syncProductStatue(product, true);
     emit(RefreshResource());
   }
 
   void removeFromFavouriteList(Product product) {
     product.isFavourite = false;
     favouriteProducts.removeWhere((element) => element.id == product.id);
-    syncProductStatue(product, false);
     emit(RefreshResource());
-  }
-
-  void syncProductStatue(Product model, bool newStatus) {
-    final product = products.firstWhere((element) => element.id == model.id);
-    product.isFavourite = newStatus;
   }
 
   Future<void> getProducts() async {

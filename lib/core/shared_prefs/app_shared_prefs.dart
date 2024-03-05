@@ -1,4 +1,5 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:ready_structure/features/auth/data/model/user_model.dart';
 import '../helpers/enum/app_mode.dart';
 import 'secure_shared_prefs.dart';
 import 'secured_string_value.dart';
@@ -6,6 +7,7 @@ import 'secured_string_value.dart';
 class AppSharedPrefs {
   SecureStringValue token = SecureStringValue(_SPKeys.tokenKey);
   SecureStringValue refreshToken = SecureStringValue(_SPKeys.refreshTokenKey);
+  SecureStringValue userModel = SecureStringValue(_SPKeys.userModel);
 
   final ReadWriteValue<String> _appMode =
       ReadWriteValue(_SPKeys.appMode, AppMode.Light.name);
@@ -21,7 +23,16 @@ class AppSharedPrefs {
 
   Future<void> _initAllSecure() async {
     await token.fetch();
+    await userModel.fetch();
     await refreshToken.fetch();
+  }
+
+  void setUserModel(UserModel user) {
+    userModel.setValue(user.toJson());
+  }
+
+  UserModel getUser(){
+    return UserModel.fromJson(userModel.val!);
   }
 
   Future<void> clearSecureSP() async {
@@ -53,6 +64,7 @@ abstract class _SPKeys {
   static const tokenKey = 'tokenKey';
   static const rememberMe = 'rememberMe';
   static const refreshTokenKey = 'refreshTokenKey';
+  static const userModel = 'userModel';
   static const appMode = 'appMode';
   static const appLanguage = 'appLanguage';
 }

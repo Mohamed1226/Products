@@ -77,6 +77,7 @@ dependencies:
 #  shared_preferences: ^2.0.11
   get_storage: ^2.0.3
   cache_manager: ^1.0.0+4
+  objectbox: ^1.4.0
   flutter_secure_storage: ^5.0.2
 #  objectbox: ^2.0.0
 #  objectbox_flutter_libs: ^2.0.0
