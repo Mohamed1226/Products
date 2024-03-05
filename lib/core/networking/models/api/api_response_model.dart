@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:ready_structure/core/networking/models/api/message/message_model.dart';
 import 'package:ready_structure/core/networking/models/bases/base_model.dart';
 
-typedef T ResponseConverter<T>(Map<String, dynamic> json, [int? totalRows]);
+typedef T ResponseConverter<T>(
+  Map<String, dynamic> json,
+);
 typedef T GeneralResponseConverter<T>(Map<String, dynamic> json);
 
 /// General response coming from API
@@ -12,7 +15,6 @@ typedef T GeneralResponseConverter<T>(Map<String, dynamic> json);
 class ApiResponseModel<D extends BaseModel> {
   ApiResponseModel({
     this.data,
-    required this.message,
   });
 
   static MessageModel parseMessage(Map<String, dynamic> json) {
@@ -21,24 +23,23 @@ class ApiResponseModel<D extends BaseModel> {
         : MessageModel.fromJson(json["message"]);
   }
 
-  final MessageModel message;
   final D? data;
 
   factory ApiResponseModel.fromJson(
-          Map<String, dynamic> json, ResponseConverter<D> converter) =>
-      ApiResponseModel(
-        data: json["data"] == null
-            ? null
-            : (json["data"] is List
-                ? converter({
-                    'items': json["data"],
-                    "additionalData": json["additionalData"] ?? null
-                  }, json["totalRows"])
-                : (json["data"] is Map<String, dynamic>
-                    ? converter(json["data"])
-                    : converter({'val': json["data"]}))),
-        message: parseMessage(json),
-      );
+      dynamic json, ResponseConverter<D> converter) {
+
+    return ApiResponseModel(
+      data:  (json is List
+              ? converter(
+                  {
+                    'items': json,
+                  },
+                )
+              : (json["data"] is Map<String, dynamic>
+                  ? converter(json["data"])
+                  : converter({'val': json["data"]}))),
+    );
+  }
 
   factory ApiResponseModel.fromRawJson(response,
       {required ResponseConverter<D> converter}) {

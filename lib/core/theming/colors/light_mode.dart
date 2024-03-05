@@ -4,8 +4,8 @@ import 'colors_manager.dart';
 
 class LightColors implements ColorsManager {
   @override
-  Color primaryColor = const Color(0xffEBEBEB);
+  Color primaryColor = Colors.purpleAccent;
 
   @override
-  Color buttonColor =  Colors.greenAccent;
+  Color buttonColor = Colors.greenAccent;
 }

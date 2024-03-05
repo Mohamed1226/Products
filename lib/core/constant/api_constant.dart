@@ -1,3 +1,6 @@
 class APIConstant{
-  static const String baseUrl = "";
+  static const String baseUrl = "https://fakestoreapi.com/";
+
+  ///products
+
 }

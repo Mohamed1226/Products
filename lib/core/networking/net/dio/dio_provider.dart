@@ -28,7 +28,7 @@ import '../../errors/base_error.dart';
 import '../../errors/custom_error.dart';
 
 class DioProvider implements NetProvider {
-  const DioProvider._();
+  const DioProvider();
 
   @override
   Future<Result<T>> sendRequest<T extends BaseApiDataModel>({
@@ -98,18 +98,8 @@ class DioProvider implements NetProvider {
 
       final apiResponseModel =
           ApiResponseModel<T>.fromRawJson(response, converter: converter);
+      return Result(data: apiResponseModel.data);
 
-      if (apiResponseModel.message.success) {
-        if (T.toString() == 'VoidApiResponse') {
-          return Result(
-              data: VoidApiResponse(
-                  successMessage: apiResponseModel.message.messages) as T);
-        }
-
-        return Result(data: apiResponseModel.data);
-      } else {
-        return Result(error: ApiError(apiResponseModel.message));
-      }
     }
 
     /// Handling Dio Errors
@@ -298,18 +288,8 @@ class DioProvider implements NetProvider {
 
       final apiResponseModel =
           ApiResponseModel<T>.fromRawJson(response, converter: converter);
+      return Result(data: apiResponseModel.data);
 
-      if (apiResponseModel.message.success) {
-        if (T.toString() == 'VoidApiResponse') {
-          return Result(
-              data: VoidApiResponse(
-                  successMessage: apiResponseModel.message.messages) as T);
-        }
-
-        return Result(data: apiResponseModel.data);
-      } else {
-        return Result(error: ApiError(apiResponseModel.message));
-      }
     }
 
     /// Handling Dio Errors
@@ -395,18 +375,8 @@ class DioProvider implements NetProvider {
 
       final apiResponseModel =
           ApiResponseModel<T>.fromRawJson(response, converter: converter);
+      return Result(data: apiResponseModel.data);
 
-      if (apiResponseModel.message.success) {
-        if (T.toString() == 'VoidApiResponse') {
-          return Result(
-              data: VoidApiResponse(
-                  successMessage: apiResponseModel.message.messages) as T);
-        }
-
-        return Result(data: apiResponseModel.data);
-      } else {
-        return Result(error: ApiError(apiResponseModel.message));
-      }
     }
 
     /// Handling Dio Errors
@@ -447,7 +417,7 @@ class DioProvider implements NetProvider {
             return ForbiddenError();
 
           case 401:
-            return UnauthorizedError(responseModel?.message);
+            return UnauthorizedError(null);
           case 400:
           case 404:
           case 409:
@@ -457,7 +427,7 @@ class DioProvider implements NetProvider {
             log('responseModel.statusMessage ${error.response!.statusMessage}');
             //  log('responseModel.message ${responseModel.message}');
             return responseModel != null
-                ? HttpError(responseModel.message)
+                ? const HttpError(null)
                 : HttpError.fromDynamic(error.error);
         }
       }
