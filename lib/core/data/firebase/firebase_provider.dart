@@ -12,7 +12,7 @@ class FirebaseRDS {
   Future<Result<VoidApiResponse>> createUser(UserModel user) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
+          email: user.email, password: user.password!);
 
       return Result(data: const VoidApiResponse());
     } on FirebaseException catch (e) {
@@ -27,7 +27,7 @@ class FirebaseRDS {
   Future<Result<VoidApiResponse>> logInUser(UserModel user) async {
     try {
      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: user.email, password: user.password);
+          email: user.email, password: user.password!);
 
       return Result(data: const VoidApiResponse());
     } on FirebaseException catch (e) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_structure/core/di/locator.dart';
 import 'package:ready_structure/core/helpers/extensions/context_extensions.dart';
+import 'package:ready_structure/core/services/navigation.dart';
 import 'package:ready_structure/core/theming/colors/colors_manager.dart';
 import 'package:ready_structure/core/theming/styles/fonts.dart';
 import 'package:ready_structure/core/ui/loader/loading_widget.dart';
@@ -12,6 +13,7 @@ import 'package:ready_structure/features/auth/presentation/cubit/auth_cubit.dart
 import 'package:ready_structure/features/products/presentation/cubit/product_cubit.dart';
 import 'package:ready_structure/features/products/presentation/screen/products_favourite_screen.dart';
 import 'package:ready_structure/features/products/presentation/widget/products_list_widget.dart';
+import 'package:ready_structure/features/user/presentation/screen/user_screen.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -60,13 +62,34 @@ class _ProductsScreenState extends AppScreen<ProductsScreen, ProductCubit> {
 
   Drawer productsDrawer() {
     return Drawer(
-      child: TextButton(
-        onPressed: () {
-          locator<AuthCubit>().logOut();
-        },
-        child: Text(
-          "logout",
-          style: Styles.font12PrimaryColorWeight700(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 100.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextButton(
+              onPressed: () {
+                locator<NavigationService>()
+                    .navigateByWidget(const UserScreen());
+              },
+              child: Text(
+                "User profile",
+                style: Styles.font12PrimaryColorWeight700(
+                    fontSize: AppFontSize.fontSize_16),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                locator<AuthCubit>().logOut();
+              },
+              child: Text(
+                "logout",
+                style: Styles.font12PrimaryColorWeight700(
+                    fontSize: AppFontSize.fontSize_16),
+              ),
+            ),
+          ],
         ),
       ),
     );

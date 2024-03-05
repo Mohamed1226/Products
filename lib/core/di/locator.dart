@@ -9,6 +9,7 @@ import 'package:ready_structure/features/products/data/data_source/product_rds_i
 import 'package:ready_structure/features/products/data/repository/product_repo_impl.dart';
 import 'package:ready_structure/features/products/domain/usecases/product_usecases.dart';
 import 'package:ready_structure/features/products/presentation/cubit/product_cubit.dart';
+import 'package:ready_structure/features/user/presentation/screen/cubit/user_cubit.dart';
 
 import '../services/navigation.dart';
 import '../shared_prefs/app_shared_prefs.dart';
@@ -19,6 +20,7 @@ void setupLocator() {
   locator.registerLazySingleton<NavigationService>(() => NavigationService());
   locator.registerLazySingleton<AppSharedPrefs>(() => AppSharedPrefs());
   locator.registerLazySingleton<ApplicationCubit>(() => ApplicationCubit());
+  locator.registerLazySingleton<UserCubit>(() => UserCubit());
   locator.registerLazySingleton<AuthCubit>(() => AuthCubit(
       useCase:
           AuthUseCase(repository: AuthRepositoryImpl(rdsImpl: AuthRDSImpl()))));
