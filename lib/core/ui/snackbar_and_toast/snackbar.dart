@@ -81,6 +81,7 @@ class _SuccessSnackbar extends SnackBar {
                       message,
                       //textAlign: TextAlign.left,
                       style: Styles.font14PrimaryColorWeight500(
+                        color: AppFixedColors.white,
                         fontSize: AppFontSize.fontSize_14,
                         fontWeight: AppFontWeight.weight_400,
                       ),
@@ -118,8 +119,10 @@ class _ErrorSnackBar extends SnackBar {
                       message,
                       //textAlign: TextAlign.left,
                       style: Styles.font14PrimaryColorWeight500(
+                        color: AppFixedColors.white,
                         fontSize: AppFontSize.fontSize_14,
                         fontWeight: AppFontWeight.weight_400,
+
                       ),
                     ),
                   ),

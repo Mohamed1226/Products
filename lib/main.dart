@@ -1,18 +1,19 @@
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ready_structure/app.dart';
 import 'package:ready_structure/core/networking/errors/app_error_reporter/app_error_reporter.dart';
-
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'core/di/locator.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  setupLocator();
-  await firebaseInit();
   runZonedGuarded(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      setupLocator();
+      await firebaseInit();
       await AppErrorReporter.init(appRunner: () => runApp(const MyApp()));
     },
     (Object error, StackTrace stack) {
@@ -24,4 +25,15 @@ void main() async {
 
 Future<void> firebaseInit() async {
   await Firebase.initializeApp();
+  if (!kDebugMode) {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.playIntegrity,
+      appleProvider: AppleProvider.appAttest,
+    );
+  } else {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.debug,
+      appleProvider: AppleProvider.debug,
+    );
+  }
 }

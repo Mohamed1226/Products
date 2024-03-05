@@ -43,7 +43,7 @@ class AppErrorReporter {
 
   static onStackError(StackTrace stack) {
     log(stack.toString());
-    AppToast.showDebugToast(stack.toString());
+   // AppToast.showDebugToast(stack.toString());
   }
 
   static reportError() {

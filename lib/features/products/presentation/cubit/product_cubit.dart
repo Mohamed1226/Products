@@ -11,11 +11,14 @@ class ProductCubit extends AppCubit {
   List<Product> products = [];
 
   Future<void> getProducts() async {
+    emit(LoadingResource());
     final result = await useCase.getProducts();
     if (result.hasDataOnly) {
+      emit(SuccessResource());
       products = result.data!.products;
     } else {
-      AppSnackBar.showErrorSnackBar();
+      emit(ErrorResource());
+      AppSnackBar.showErrorSnackBar(message: result.error!.message);
     }
   }
 }

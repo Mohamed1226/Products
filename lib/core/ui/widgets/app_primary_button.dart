@@ -55,7 +55,7 @@ class AppPrimaryButton extends StatelessWidget {
       borderRadius: radius,
       onPressed: isClickable ? onPressed : null,
       color: isClickable
-          ? color ?? ColorsManager.instance(context).buttonColor
+          ? color ?? AppFixedColors.primaryColor
           : ColorsManager.instance(context).buttonColor.withOpacity(.6),
       child: FittedBox(
         child: Row(
@@ -71,7 +71,8 @@ class AppPrimaryButton extends StatelessWidget {
                   FittedBox(
                     child: Text(
                       text,
-                      style: Styles.font14PrimaryColorWeight500(color: textColor),
+                      style:
+                          Styles.font14PrimaryColorWeight500(color: textColor),
                       textAlign: TextAlign.center,
                     ),
                   ),

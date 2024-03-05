@@ -11,7 +11,7 @@ import 'package:ready_structure/features/auth/data/model/user_model.dart';
 class FirebaseRDS {
   Future<Result<VoidApiResponse>> createUser(UserModel user) async {
     try {
-      FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: user.email, password: user.password);
 
       return Result(data: const VoidApiResponse());
@@ -26,7 +26,7 @@ class FirebaseRDS {
 
   Future<Result<VoidApiResponse>> logInUser(UserModel user) async {
     try {
-      FirebaseAuth.instance.signInWithEmailAndPassword(
+     await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: user.email, password: user.password);
 
       return Result(data: const VoidApiResponse());

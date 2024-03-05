@@ -18,9 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
       if (locator<AppSharedPrefs>().isRememberMe) {
-        locator<NavigationService>().navigateByWidget(const ProductsScreen());
+        locator<NavigationService>().pushAndRemoveUntil(const ProductsScreen());
       } else {
-        locator<NavigationService>().navigateByWidget(const RegisterScreen());
+        locator<NavigationService>().pushAndRemoveUntil(const RegisterScreen());
       }
     });
     super.initState();

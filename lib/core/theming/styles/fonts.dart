@@ -22,7 +22,7 @@ class Styles {
         height: height,
         decoration: decoration,
         fontFamily: _fontFamily,
-        color: color ?? ColorsManager.defaultInstance.primaryColor);
+        color: color ?? AppFixedColors.darkGrey2);
   }
 
   static TextStyle font12PrimaryColorWeight700(

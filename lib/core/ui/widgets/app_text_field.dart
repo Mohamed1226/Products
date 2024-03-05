@@ -127,9 +127,7 @@ class AppTextFormField extends StatelessWidget {
           suffixIcon: suffix,
         ),
         keyboardType: type ??
-            const TextInputType.numberWithOptions(
-              decimal: true,
-            ),
+             TextInputType.text,
       ),
     );
   }

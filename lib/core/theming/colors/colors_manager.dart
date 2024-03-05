@@ -26,5 +26,13 @@ class AppFixedColors {
   static const Color openGreen = Colors.green;
   static const Color openYellow = Colors.yellow;
   static const Color darkGrey2 = Colors.grey;
+  static const Color primaryColor = const Color(0xff005239);
 
+  static const Color secondaryColor1 = const Color(0xffB7CFC7);
+
+  static const Color secondaryColor2 = const Color(0xffE5EEEB);
+
+  static const Color secondaryColor3 = const Color(0xffB7CFC7);
+
+  static const Color cardBG = Color(0xffE5EEEB);
 }
