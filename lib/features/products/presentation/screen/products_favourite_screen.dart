@@ -28,7 +28,7 @@ class _ProductsFavouriteScreenState
       bloc: cubit,
       builder: (context, state) {
         return Scaffold(
-          appBar: productsAppBar(),
+          appBar: productsAppBar(cubit.favouriteProducts.length),
           body: SingleChildScrollView(
               child: SizedBox(
             height: height,
@@ -43,9 +43,9 @@ class _ProductsFavouriteScreenState
     );
   }
 
-  AppBar productsAppBar() {
+  AppBar productsAppBar(int length) {
     return AppBar(
-        title: const Text("Products list"),
+        title: Text("Products favourite list" + " (${length})"),
         backgroundColor: AppFixedColors.primaryColor);
   }
 
