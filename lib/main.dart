@@ -7,13 +7,12 @@ import 'package:ready_structure/core/networking/errors/app_error_reporter/app_er
 
 import 'core/di/locator.dart';
 
-void main() {
-
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
+  await firebaseInit();
   runZonedGuarded(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      setupLocator();
-      await firebaseInit();
       await AppErrorReporter.init(appRunner: () => runApp(const MyApp()));
     },
     (Object error, StackTrace stack) {

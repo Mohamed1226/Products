@@ -12,16 +12,16 @@ import 'package:ready_structure/core/validators/email_validator.dart';
 import 'package:ready_structure/core/validators/required_validators.dart';
 import 'package:ready_structure/features/auth/data/model/user_model.dart';
 import 'package:ready_structure/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:ready_structure/features/auth/presentation/screen/login_screen.dart';
+import 'package:ready_structure/features/auth/presentation/screen/register_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends AppScreen<RegisterScreen, AuthCubit> {
+class _LoginScreenState extends AppScreen<LoginScreen, AuthCubit> {
   final key = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final nameController = TextEditingController();
@@ -41,18 +41,12 @@ class _RegisterScreenState extends AppScreen<RegisterScreen, AuthCubit> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "register screen",
+                    "Login screen",
                     style: Styles.font12PrimaryColorWeight700(
                         fontWeight: AppFontWeight.weight_700,
                         fontSize: AppFontSize.fontSize_16),
                   ),
                   SizedBox(height: 24.h),
-                  AppTextFormField(
-                    label: "your name",
-                    controller: nameController,
-                    validators: [RequiredValidator()],
-                  ),
-                  SizedBox(height: 18.h),
                   AppTextFormField(
                       label: "your email",
                       controller: emailController,
@@ -66,25 +60,25 @@ class _RegisterScreenState extends AppScreen<RegisterScreen, AuthCubit> {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                      text: 'Already have account',
+                      text: 'Not have account',
                       style: Styles.font12PrimaryColorWeight700(),
                     ),
                     TextSpan(
-                      text: ' login',
+                      text: ' register',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => locator<NavigationService>()
-                            .pushAndRemoveUntil(const LoginScreen()),
+                            .pushAndRemoveUntil(const RegisterScreen()),
                       style: Styles.font12PrimaryColorWeight700(
                           color: AppFixedColors.openGreen),
                     ),
                   ])),
                   SizedBox(height: 24.h),
                   AppPrimaryButton(
-                    text: "register",
+                    text: "login",
                     textColor: AppFixedColors.white,
                     onPressed: () {
                       if (key.currentState!.validate()) {
-                        cubit.register(
+                        cubit.login(
                             user: UserModel(
                                 email: emailController.text,
                                 name: nameController.text,

@@ -9,6 +9,8 @@ class AppSharedPrefs {
 
   final ReadWriteValue<String> _appMode =
       ReadWriteValue(_SPKeys.appMode, AppMode.Light.name);
+  final ReadWriteValue<bool> _rememberMe =
+      ReadWriteValue(_SPKeys.rememberMe, false);
   final ReadWriteValue<String?> _appLanguage =
       ReadWriteValue(_SPKeys.appLanguage, null);
 
@@ -24,6 +26,12 @@ class AppSharedPrefs {
 
   Future<void> clearSecureSP() async {
     return SecureSharedPrefs.clear();
+  }
+
+  bool get isRememberMe => _rememberMe.val;
+
+  Future<void> setRememberMe(bool rememberMe) async {
+    _rememberMe.val = rememberMe;
   }
 }
 
@@ -43,6 +51,7 @@ extension FirstRunSPValue on AppSharedPrefs {
 
 abstract class _SPKeys {
   static const tokenKey = 'tokenKey';
+  static const rememberMe = 'rememberMe';
   static const refreshTokenKey = 'refreshTokenKey';
   static const appMode = 'appMode';
   static const appLanguage = 'appLanguage';

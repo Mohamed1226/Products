@@ -71,7 +71,7 @@ class AppPrimaryButton extends StatelessWidget {
                   FittedBox(
                     child: Text(
                       text,
-                      style: Styles.font14PrimaryColorWeight500(),
+                      style: Styles.font14PrimaryColorWeight500(color: textColor),
                       textAlign: TextAlign.center,
                     ),
                   ),

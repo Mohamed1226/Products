@@ -1,3 +1,5 @@
+import 'package:ready_structure/core/di/locator.dart';
+import 'package:ready_structure/core/shared_prefs/app_shared_prefs.dart';
 import 'package:ready_structure/core/ui/cubit/app_cubit.dart';
 import 'package:ready_structure/core/ui/snackbar_and_toast/snackbar.dart';
 import 'package:ready_structure/core/ui/state/cubit_state.dart';
@@ -11,6 +13,7 @@ class AuthCubit extends AppCubit {
   Future<void> register({required UserModel user}) async {
     final result = await useCase.register(user);
     if (result.hasDataOnly) {
+      locator<AppSharedPrefs>().setRememberMe(true);
       AppSnackBar.showSuccessSnackBar();
     } else {
       AppSnackBar.showErrorSnackBar();
@@ -20,6 +23,7 @@ class AuthCubit extends AppCubit {
   Future<void> login({required UserModel user}) async {
     final result = await useCase.login(user);
     if (result.hasDataOnly) {
+      locator<AppSharedPrefs>().setRememberMe(true);
       AppSnackBar.showSuccessSnackBar();
     } else {
       AppSnackBar.showErrorSnackBar();

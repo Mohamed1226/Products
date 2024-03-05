@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ready_structure/core/di/locator.dart';
 import 'package:ready_structure/core/services/navigation.dart';
+import 'package:ready_structure/core/shared_prefs/app_shared_prefs.dart';
 import 'package:ready_structure/core/theming/styles/fonts.dart';
 import 'package:ready_structure/features/auth/presentation/screen/register_screen.dart';
+import 'package:ready_structure/features/products/presentation/screen/products_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,11 +16,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () =>
-          locator<NavigationService>().navigateByWidget(const RegisterScreen()),
-    );
+    Future.delayed(const Duration(seconds: 3), () {
+      if (locator<AppSharedPrefs>().isRememberMe) {
+        locator<NavigationService>().navigateByWidget(const ProductsScreen());
+      } else {
+        locator<NavigationService>().navigateByWidget(const RegisterScreen());
+      }
+    });
     super.initState();
   }
 
